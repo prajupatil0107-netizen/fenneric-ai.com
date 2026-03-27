@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 # 1. THE FOUNDER'S KEY (Line 6)
 # Paste your NEW AIza key between the quotes below
-GEMINI_KEY = "AIzaSyAQlclFXfd34ga1fZvXg-l-FNvxf03h3fc"
+GEMINI_KEY = "AIzaSyAEsNg13UPbN2o693hlP2tKc0nVUFoI0Kc"
 
 # 2. CONNECT TO THE BRAIN
 genai.configure(api_key=GEMINI_KEY)
@@ -11,7 +11,7 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 # 3. THE INTERFACE LOOK
 st.set_page_config(page_title="Fenneric AI v2", page_icon="🛡️")
 st.title("🛡️ Fenneric AI")
-st.caption("Gemini 3 Flash | 167 Subs Milestone | Active")
+st.caption("Gemini 1.5 Flash | 167 Subs Milestone | Active")
 
 # 4. THE MEMORY BANK
 if "messages" not in st.session_state:
