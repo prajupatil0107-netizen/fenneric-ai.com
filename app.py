@@ -1,41 +1,43 @@
 import streamlit as st
 import google.generativeai as genai
 
-# --- 1. THE FOUNDER'S KEY ---
-# Replace the text below with your AIza... key from Google AI Studio
+# 1. THE FOUNDER'S KEY (Line 6)
+# Paste your NEW AIza key between the quotes below
 GEMINI_KEY = "AIzaSyDK2-nEWAv9P7tExkRV2yHmcJ-HRzKxODM"
 
+# 2. CONNECT TO THE BRAIN
 genai.configure(api_key=GEMINI_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-# --- 2. THE LOOK & TONE ---
+# 3. THE INTERFACE LOOK
 st.set_page_config(page_title="Fenneric AI v2", page_icon="🛡️")
-
-# --- 3. THE CHAT ENGINE ---
 st.title("🛡️ Fenneric AI")
-st.caption("Gemini Flash | 167 Subs Milestone | Active")
+st.caption("Gemini 3 Flash | 167 Subs Milestone | Active")
 
+# 4. THE MEMORY BANK
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# 5. SHOW PREVIOUS CHAT
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
+# 6. THE COMMAND INPUT
 if prompt := st.chat_input("Command the Empire..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.write(prompt)
     
-    # SYSTEM PROMPT: This makes Gemini talk like the real Fenneric
-    full_prompt = f"You are Fenneric AI. Use words like 'Bro', 'Empire', and '167 Subs'. Be smart but cool. User asks: {prompt}"
+    # SYSTEM INSTRUCTION
+    instruction = f"You are Fenneric AI, the digital general of the Fenneric Empire (167 Subs). Be cool, use 'Bro', and be smart. User says: {prompt}"
     
     try:
-        response = model.generate_content(full_prompt)
-        ai_reply = response.text
+        response = model.generate_content(instruction)
+        reply = response.text
     except Exception as e:
-        ai_reply = "Bro, there's a system glitch! Check the API key on line 6."
+        reply = "Empire Error: Check the API Key in Line 6, Bro!"
 
     with st.chat_message("assistant"):
-        st.write(ai_reply)
-    st.session_state.messages.append({"role": "assistant", "content": ai_reply})
+        st.write(reply)
+    st.session_state.messages.append({"role": "assistant", "content": reply})
