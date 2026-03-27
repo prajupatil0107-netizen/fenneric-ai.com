@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 # --- 1. THE FOUNDER'S KEY ---
 # Replace the text below with your AIza... key from Google AI Studio
-GEMINI_KEY = "AIzaSyCsHdwMU7wOqFtf1YAbQZFu9iYAPwig3CI"
+GEMINI_KEY = "AIzaSyDK2-nEWAv9P7tExkRV2yHmcJ-HRzKxODM"
 
 genai.configure(api_key=GEMINI_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
