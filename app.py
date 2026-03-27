@@ -1,18 +1,19 @@
 import streamlit as st
-from openai import OpenAI
+import google.generativeai as genai
 
 # --- 1. THE FOUNDER'S KEY ---
-# Replace the text inside the quotes with your sk-... key from OpenAI
-OPENAI_API_KEY = "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"
+# Replace the text below with your AIza... key from Google AI Studio
+GEMINI_KEY = "AIzaSyCsHdwMU7wOqFtf1YAbQZFu9iYAPwig3CI"
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+genai.configure(api_key=GEMINI_KEY)
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 # --- 2. THE LOOK & TONE ---
 st.set_page_config(page_title="Fenneric AI v2", page_icon="🛡️")
 
 # --- 3. THE CHAT ENGINE ---
 st.title("🛡️ Fenneric AI")
-st.caption("ChatGPT Brain | 167 Subs Milestone | Active")
+st.caption("Gemini Flash | 167 Subs Milestone | Active")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -26,18 +27,14 @@ if prompt := st.chat_input("Command the Empire..."):
     with st.chat_message("user"):
         st.write(prompt)
     
-    # SYSTEM PROMPT: This makes ChatGPT talk like Fenneric!
+    # SYSTEM PROMPT: This makes Gemini talk like the real Fenneric
+    full_prompt = f"You are Fenneric AI. Use words like 'Bro', 'Empire', and '167 Subs'. Be smart but cool. User asks: {prompt}"
+    
     try:
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are Fenneric AI. Use words like 'Bro', 'Empire', and '167 Subs'. Be smart but cool."},
-                {"role": "user", "content": prompt}
-            ]
-        )
-        ai_reply = response.choices[0].message.content
+        response = model.generate_content(full_prompt)
+        ai_reply = response.text
     except Exception as e:
-        ai_reply = "Bro, there is a Billing Error or the Key is wrong! Check your OpenAI dashboard."
+        ai_reply = "Bro, there's a system glitch! Check the API key on line 6."
 
     with st.chat_message("assistant"):
         st.write(ai_reply)
