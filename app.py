@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 # 1. THE FOUNDER'S KEY (Line 6)
 # Paste your NEW AIza key between the quotes below
-GEMINI_KEY = "AIzaSyAEsNg13UPbN2o693hlP2tKc0nVUFoI0Kc"
+GEMINI_KEY = st.secrets["GEMINI_KEY"]
 
 # 2. CONNECT TO THE BRAIN
 genai.configure(api_key=GEMINI_KEY)
