@@ -3,7 +3,7 @@ from openai import OpenAI
 
 # --- 1. THE FOUNDER'S KEY ---
 # Replace the text inside the quotes with your sk-... key from OpenAI
-OPENAI_API_KEY = "PASTE_YOUR_sk_KEY_HERE"
+OPENAI_API_KEY = "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"
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
